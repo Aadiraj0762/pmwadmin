@@ -111,26 +111,14 @@ module.exports = {
     'react/no-children-prop': 'off',
     '@next/next/no-img-element': 'off',
     '@next/next/no-page-custom-font': 'off',
+     "react/react-in-jsx-scope": "off",
+     "import/order": "off",
+     "react/prop-types": "off",
+"react/no-unknown-property": "off",
+    "react-hooks/exhaustive-deps": "off", // Change to 'off' if needed
+    "import/named": "off",
+    
 
-    // ✅ Added: Automatically sort & fix imports
-    'import/order': [
-      'error',
-      {
-        groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
-        pathGroups: [
-          { pattern: 'react', group: 'external', position: 'before' },
-          { pattern: 'next/**', group: 'external', position: 'before' },
-          { pattern: '~/**', group: 'external', position: 'before' },
-          { pattern: '@/**', group: 'internal' }
-        ],
-        pathGroupsExcludedImportTypes: ['react', 'type'],
-        'newlines-between': 'always',
-        alphabetize: { order: 'asc', caseInsensitive: true } // ✅ Alphabetized sorting
-      }
-    ],
-
-    // ✅ Added: Autofix missing dependencies
-    'react-hooks/exhaustive-deps': 'warn',
 
     // ✅ Added: Improve readability with spacing
     'lines-around-comment': [

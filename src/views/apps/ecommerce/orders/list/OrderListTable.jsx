@@ -59,7 +59,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL
 // Style Imports
 import tableStyles from '@core/styles/table.module.css'
 
-import { Alert } from '@mui/material/Alert';
+import Alert from '@mui/material/Alert'
 
 export const stsChipColor = {
   instant: { color: '#ff4d49', text: 'Instant' },       // Blue
