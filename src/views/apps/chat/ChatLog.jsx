@@ -2,22 +2,30 @@
 
 
 import { useEffect, useRef, useState } from 'react'
+
 import axios from 'axios'
+
 // MUI Imports
 import Typography from '@mui/material/Typography'
 import Avatar from '@mui/material/Avatar'
 import CardContent from '@mui/material/CardContent'
+
 // Third-party Imports
 import classnames from 'classnames'
 import PerfectScrollbar from 'react-perfect-scrollbar'
+
+
 // Component Imports
 import CustomAvatar from '@core/components/mui/Avatar'
+
 // Util Imports
 import { getInitials } from '@/utils/getInitials'
+
 const formatChatData = (chats, profileUser) => {
   const formattedChatData = []
   let chatMessageSenderId = chats[0] ? chats[0].sender : profileUser.id
   let msgGroup = { senderId: chatMessageSenderId, messages: [] }
+
   chats.forEach((chat, index) => {
     if (chatMessageSenderId === chat.sender) {
       msgGroup.messages.push({ time: chat.time, message: chat.message, image: chat.image })
@@ -26,9 +34,11 @@ const formatChatData = (chats, profileUser) => {
       formattedChatData.push(msgGroup)
       msgGroup = { senderId: chat.sender, messages: [{ time: chat.time, message: chat.message, image: chat.image }] }
     }
+
     if (index === chats.length - 1) formattedChatData.push(msgGroup)
   })
-  return formattedChatData
+  
+return formattedChatData
 }
 
 const ScrollWrapper = ({ children, isBelowLgScreen, scrollRef, className }) => {
@@ -50,7 +60,9 @@ const ChatLog = ({ chatStore, isBelowLgScreen, isBelowMdScreen, isBelowSmScreen 
   const [loading, setLoading] = useState(false)
   const scrollRef = useRef(null)
   const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'
+
   console.log('const API_URL = process.env.NEXT_PUBLIC_API_URL ',API_URL);
+
   const scrollToBottom = () => {
     if (scrollRef.current) {
       if (isBelowLgScreen) {
@@ -75,6 +87,7 @@ const ChatLog = ({ chatStore, isBelowLgScreen, isBelowMdScreen, isBelowSmScreen 
       setLoading(true)
       const response = await axios.get(`${API_URL}/vendor/gethelpvendor/${activeUser.id}`);
       const helpRequests = response.data.helpRequests || []
+
       const extractedMessages = helpRequests.flatMap(request =>
         request.chatbox.map(chat => ({
           sender: request.vendorid,
@@ -83,6 +96,7 @@ const ChatLog = ({ chatStore, isBelowLgScreen, isBelowMdScreen, isBelowSmScreen 
           image: chat.image
         }))
       )
+
       setMessages(extractedMessages)
     } catch (error) {
       console.error('Error fetching messages:', error)
@@ -107,7 +121,9 @@ const ChatLog = ({ chatStore, isBelowLgScreen, isBelowMdScreen, isBelowSmScreen 
         ) : (
           formatChatData(messages, profileUser).map((msgGroup, index) => {
             const isSender = msgGroup.senderId === profileUser.id
-            return (
+
+            
+return (
               <div key={index} className={classnames('flex gap-4 p-5', { 'flex-row-reverse': isSender })}>
                 {!isSender ? (
                   contacts.find(contact => contact.id === msgGroup.senderId)?.avatar ? (

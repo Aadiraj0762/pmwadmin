@@ -1,5 +1,6 @@
 
 import { useState } from "react";
+
 import axios from "axios";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -23,6 +24,7 @@ const BookingActionButton = ({ bookingId, currentStatus, onUpdate }) => {
     // Function to handle API calls
     const handleApiCall = async () => {
         setLoading(true);
+
         try {
             let url = "";
             let newStatus = status;
@@ -41,11 +43,13 @@ const BookingActionButton = ({ bookingId, currentStatus, onUpdate }) => {
 
             } else if (status === "Cancelled") {
                 alert('status is cancelled ');
-                return; // No action after cancellation
+                
+return; // No action after cancellation
             }
 
             if (url) {
                 const response = await axios.put(url);
+
                 if (response.data.success) {
                     setStatus(newStatus);
                     onUpdate(); // Refresh table
@@ -54,12 +58,14 @@ const BookingActionButton = ({ bookingId, currentStatus, onUpdate }) => {
         } catch (error) {
             console.error("API Error:", error);
         }
+
         setLoading(false);
     };
 
     // Function to handle exit with amount & hours
     const handleExit = async () => {
         setLoading(true);
+
         try {
             const response = await axios.put(`${API_URL}/vendor/exitvehicle/${bookingId}`, { amount, hour });
 
@@ -70,11 +76,13 @@ const BookingActionButton = ({ bookingId, currentStatus, onUpdate }) => {
                 setExitDisabled(true); // ✅ Disable Exit button after submission
                 onUpdate(); // Refresh table
             }
+
             window.location.href = "/en/apps/ecommerce/orders/list";
 
         } catch (error) {
             console.error("Exit API Error:", error);
         }
+
         setLoading(false);
         setOpenDialog(false);
     };

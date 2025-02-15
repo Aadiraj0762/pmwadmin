@@ -1,5 +1,5 @@
-import fs from 'fs-extra'
 import { consola } from 'consola'
+import fs from 'fs-extra'
 
 // Update the main layout file
 export const updateLayoutFile = async () => {

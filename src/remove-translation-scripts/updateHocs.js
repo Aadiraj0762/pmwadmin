@@ -1,5 +1,5 @@
-import fs from 'fs-extra'
 import { consola } from 'consola'
+import fs from 'fs-extra'
 
 // Update the auth guard file
 export const updateAuthGuard = async () => {

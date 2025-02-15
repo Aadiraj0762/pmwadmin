@@ -1,10 +1,15 @@
-import { promisify } from 'util'
 import { exec as execCallback, execSync } from 'child_process'
+import { promisify } from 'util'
 
 import { consola } from 'consola'
 
-import { updatePackages } from './updatePackages'
 import { findAndReplaceInFiles } from './findAndReplaceInFiles'
+import { modifyGenerateMenuFile } from './modifyGenerateMenuFile'
+import { removeFilesAndFolders } from './removeFilesAndFolders'
+import { removeLangaugeDropdown } from './removeLangaugeDropdown'
+import { reverseEslintConfig, updateEslintConfig } from './removeUnusedImports'
+import removeUnwantedCode from './removeUnwantedCode'
+import { updateAuthGuard, updateGuestOnlyRoutes } from './updateHocs'
 import {
   updateLayoutFile,
   updateDashboardLayoutFile,
@@ -12,13 +17,8 @@ import {
   updateBlankLayoutFile,
   updateFrontLayoutFile
 } from './updateLayoutFiles'
-import { removeFilesAndFolders } from './removeFilesAndFolders'
-import removeUnwantedCode from './removeUnwantedCode'
-import { reverseEslintConfig, updateEslintConfig } from './removeUnusedImports'
 import { updateMenuFiles } from './updateMenuFiles'
-import { removeLangaugeDropdown } from './removeLangaugeDropdown'
-import { modifyGenerateMenuFile } from './modifyGenerateMenuFile'
-import { updateAuthGuard, updateGuestOnlyRoutes } from './updateHocs'
+import { updatePackages } from './updatePackages'
 
 const exec = promisify(execCallback)
 

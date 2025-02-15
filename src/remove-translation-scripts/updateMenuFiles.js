@@ -1,5 +1,5 @@
-import fs from 'fs-extra'
 import { consola } from 'consola'
+import fs from 'fs-extra'
 
 const staticMenuFiles = [
   'src/components/layout/vertical/VerticalMenu.jsx',

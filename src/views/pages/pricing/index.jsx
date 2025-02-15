@@ -453,6 +453,7 @@
 // // export default PricingPage
 'use client'
 import { useState, useEffect } from 'react'
+
 import { useSession } from 'next-auth/react'
 import { DataGrid } from '@mui/x-data-grid'
 import Grid from '@mui/material/Grid'
@@ -469,12 +470,15 @@ import Chip from '@mui/material/Chip'
 import Checkbox from '@mui/material/Checkbox'
 import ListItemText from '@mui/material/ListItemText'
 import EditIcon from '@mui/icons-material/Edit'
-import CustomIconButton from '@core/components/mui/IconButton'
+
 import Snackbar from '@mui/material/Snackbar';
 import Stack from '@mui/material/Stack'
 import MuiAlert from '@mui/material/Alert';
 
+import CustomIconButton from '@core/components/mui/IconButton'
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL
+
 const amenitiesList = [
   'CCTV',
   'Wi-Fi',
@@ -486,6 +490,7 @@ const amenitiesList = [
   'Gated Parking',
   'Open Parking'
 ]
+
 const ProductVariants = () => {
   // States
   const [count, setCount] = useState(1)
@@ -499,6 +504,8 @@ const ProductVariants = () => {
   const [isLoading, setIsLoading] = useState(true)
   const { data: session } = useSession()
   const vendorId = session?.user?.id
+
+
   // DataGrid columns configuration
   const parkingColumns = [
     {
@@ -520,16 +527,20 @@ const ProductVariants = () => {
       )
     }
   ]
+
   useEffect(() => {
     if (vendorId) {
       fetchAmenitiesData()
     }
   }, [vendorId])
+
   const fetchAmenitiesData = async () => {
     setIsLoading(true)
+
     try {
       const response = await fetch(`${API_URL}/vendor/getamenitiesdata/${vendorId}`)
       const data = await response.json()
+
       if (data?.AmenitiesData) {
         setSavedData(data.AmenitiesData)
         setShowForm(false)
@@ -540,21 +551,28 @@ const ProductVariants = () => {
       setIsLoading(false)
     }
   }
+
   const handleAmenitiesChange = event => {
     setAmenities(event.target.value)
   }
+
   const handleParkingEntryChange = (index, field, value) => {
     const updatedEntries = [...parkingEntries]
+
     updatedEntries[index][field] = value
     setParkingEntries(updatedEntries)
   }
+
   const addParkingEntry = () => {
     setParkingEntries([...parkingEntries, { amount: '', text: '' }])
   }
+
   const deleteParkingEntry = index => {
     const updatedEntries = parkingEntries.filter((_, i) => i !== index)
+
     setParkingEntries(updatedEntries)
   }
+
   const handleEdit = () => {
     if (savedData) {
       setAmenities(savedData.amenities || [])
@@ -563,9 +581,12 @@ const ProductVariants = () => {
       setShowForm(true)
     }
   }
+
   const handleCancel = () => {
     setShowForm(false)
     setIsEditMode(false)
+
+
     // Reset form data to saved state
     if (savedData) {
       setAmenities(savedData.amenities || [])
@@ -639,6 +660,7 @@ const ProductVariants = () => {
         </Card>
       )
     }
+
     if (!savedData) {
       return (
         <Card>
@@ -648,7 +670,9 @@ const ProductVariants = () => {
         </Card>
       )
     }
-    return (
+
+    
+return (
       <Card>
         <CardHeader
           title='Amenities & Services'
@@ -713,6 +737,7 @@ const ProductVariants = () => {
       </Card>
     )
   }
+
   const renderForm = () => (
     <Card>
       <CardHeader title={isEditMode ? 'Edit Variants & Amenities' : 'Variants & Amenities'} />
@@ -807,8 +832,11 @@ const ProductVariants = () => {
       </CardContent>
     </Card>
   )
-  return showForm ? renderForm() : renderDataView()
+
+  
+return showForm ? renderForm() : renderDataView()
 }
+
 export default ProductVariants
 
 

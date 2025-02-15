@@ -1,7 +1,9 @@
 
 'use client'
+
 // React Imports
 import { useEffect, useState } from 'react'
+
 import axios from 'axios'
 
 // MUI Imports
@@ -22,7 +24,9 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'
 
 const getAvatar = params => {
   const { avatar, customer } = params
-  return avatar ? <Avatar src={avatar} /> : <Avatar>{getInitials(customer)}</Avatar>
+
+  
+return avatar ? <Avatar src={avatar} /> : <Avatar>{getInitials(customer)}</Avatar>
 }
 
 const CustomerDetails = ({ orderId }) => {
@@ -32,9 +36,11 @@ const CustomerDetails = ({ orderId }) => {
 
   useEffect(() => {
     if (!orderId) return
+
     const fetchCustomerDetails = async () => {
       try {
         const response = await axios.get(`${API_URL}/vendor/getbooking/${orderId}`)
+
         if (response.data && response.data.booking) {
           setCustomerData(response.data.booking)
         } else {
@@ -47,6 +53,7 @@ const CustomerDetails = ({ orderId }) => {
         setLoading(false)
       }
     }
+
     fetchCustomerDetails()
   }, [orderId])
 

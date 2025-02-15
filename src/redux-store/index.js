@@ -2,10 +2,10 @@
 import { configureStore } from '@reduxjs/toolkit'
 
 // Slice Imports
-import chatReducer from '@/redux-store/slices/chat'
 import calendarReducer from '@/redux-store/slices/calendar'
-import kanbanReducer from '@/redux-store/slices/kanban'
+import chatReducer from '@/redux-store/slices/chat'
 import emailReducer from '@/redux-store/slices/email'
+import kanbanReducer from '@/redux-store/slices/kanban'
 
 export const store = configureStore({
   reducer: {

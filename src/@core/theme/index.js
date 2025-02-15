@@ -2,11 +2,11 @@
 import { Inter } from 'next/font/google'
 
 // Theme Options Imports
-import overrides from './overrides'
 import colorSchemes from './colorSchemes'
-import spacing from './spacing'
-import shadows from './shadows'
 import customShadows from './customShadows'
+import overrides from './overrides'
+import shadows from './shadows'
+import spacing from './spacing'
 import typography from './typography'
 
 const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500', '600', '700', '800', '900'] })
