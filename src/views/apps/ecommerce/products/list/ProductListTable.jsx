@@ -176,21 +176,35 @@ const OrderListTable = ({ orderData }) => {
       columnHelper.accessor('bookingDate', {
         header: 'Booking Date & Time',
         cell: ({ row }) => {
-          const formatDate = (dateStr) => {
-            if (!dateStr) return 'Invalid Date'; // Handle missing values
-            const [day, month, year] = dateStr.split('-'); // Extract day, month, year
-            const formattedDate = new Date(`${year}-${month}-${day}`).toDateString(); // Convert and format
-
+          const formatDate = (dateString) => {
+            if (!dateString) return "Invalid Date"; // Handle null or undefined
+          
+            const date = new Date(dateString);
             
-return formattedDate; // Example Output: "Sat Feb 08 2025"
+            if (isNaN(date)) return "Invalid Date"; // Handle incorrect formats
+          
+            return date.toLocaleDateString("en-IN", {
+              day: "2-digit",
+              month: "short",
+              year: "numeric",
+            });
           };
+          
 
           
 return (
-            <Typography sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <i className="ri-calendar-2-line text-[26px]" style={{ fontSize: '16px', color: '#666' }}></i>
-              {`${formatDate(row.original.bookingDate)}, ${row.original.bookingTime}`}
-            </Typography>
+<Typography sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+  <i
+    className="ri-calendar-2-line text-[26px]"
+    style={{ fontSize: "16px", color: "#666" }}
+  ></i>
+  {row.original.bookingDate && row.original.bookingTime ? (
+    `${formatDate(row.original.bookingDate)}, ${row.original.bookingTime}`
+  ) : (
+    "Invalid Date/Time"
+  )}
+</Typography>
+
           );
         }
       }),

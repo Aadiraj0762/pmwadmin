@@ -89,21 +89,21 @@ const Login = ({ mode }) => {
   // Function to fetch user details (replace with actual API call)
   const fetchUserDetails = async (mobile) => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/getUserByMobile?mobile=${mobile}`);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/vendor/getUserByMobile?mobile=${mobile}`);
       const data = await response.json();
 
-      
-return data.success ? data.user : null;
+
+      return data.success ? data.user : null;
     } catch (error) {
       console.error("Error fetching user details:", error);
-      
-return null;
+
+      return null;
     }
   };
 
   console.log(process.env.NEXT_PUBLIC_API_URL);
-  
-return (
+
+  return (
     <div className='flex bs-full justify-center'>
       <div className={classnames('flex bs-full items-center justify-center flex-1 min-bs-[100dvh] relative p-6 max-md:hidden')}>
         <div className='pli-6 max-lg:mbs-40 lg:mbe-24'>
@@ -121,7 +121,7 @@ return (
           </div>
           <Alert icon={false} className='bg-[var(--mui-palette-primary-lightOpacity)]'>
             <Typography variant='body2' color='primary.main'>
-              Mobile: <span className='font-medium'>admin@materialize.com</span> / Pass: <span className='font-medium'>admin</span>
+              Mobile: <span className='font-medium'>+911231231234</span> / Pass: <span className='font-medium'>admin</span>
             </Typography>
           </Alert>
           <form onSubmit={handleSubmit} className='flex flex-col gap-5'>
@@ -163,7 +163,7 @@ return (
                 className='text-end'
                 color='primary.main'
                 component={Link}
-                href={getLocalizedUrl('/pages/auth/forgot-password', locale)}
+                href={getLocalizedUrl('/forgot-password', locale)}
               >
                 Forgot password?
               </Typography>

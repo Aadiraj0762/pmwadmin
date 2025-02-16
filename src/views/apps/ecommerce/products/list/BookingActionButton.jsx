@@ -19,7 +19,6 @@ const BookingActionButton = ({ bookingId, currentStatus, onUpdate }) => {
     const [hour, setHour] = useState("");
     const [exitDisabled, setExitDisabled] = useState(false); // ✅ New state to disable Exit button
     const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000'
-  const [alert, setAlert] = useState({ open: false, message: '', severity: 'info' });
 
     // Function to handle API calls
     const handleApiCall = async () => {
